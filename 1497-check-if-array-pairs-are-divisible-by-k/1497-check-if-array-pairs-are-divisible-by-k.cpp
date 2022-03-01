@@ -4,7 +4,6 @@ public:
     {
             int n=arr.size();
             vector <int> freq(k,0);
-           // memset(freq,0,k);
             for(int i=0;i<n;i++)
             {
                 int modulo=((arr[i]%k + k)%k);
