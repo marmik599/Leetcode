@@ -85,13 +85,11 @@ Node* sortedMerge(Node* head1, Node* head2)
 { 
     if(head1==NULL)
         return head2;
-        
     if(head2==NULL)
         return head1;
         
     Node* head=head1;
-    
-    if(head1->data<head2->data)
+    if(head1->data < head2->data)
     {
         head1=head1->next;
     }
@@ -100,22 +98,22 @@ Node* sortedMerge(Node* head1, Node* head2)
         head=head2;
         head2=head2->next;
     }
-    
     Node* curr=head;
     
     while(head1!=NULL && head2!=NULL)
     {
-        if(head1->data < head2->data)
-        {
-            curr->next=head1;
-            head1=head1->next;
-        }
-        else
-        {
-            curr->next=head2;
-            head2=head2->next;
-        }
-        curr=curr->next;
+     if(head1->data < head2->data)
+     {
+         curr->next=head1;
+         head1=head1->next;
+     }
+     else
+     {
+        curr->next=head2;
+        head2=head2->next;
+     }
+     curr=curr->next;
+     
     }
     if(head1==NULL)
     {
@@ -126,4 +124,7 @@ Node* sortedMerge(Node* head1, Node* head2)
         curr->next=head1;
     }
     return head;
+
+    
+    
 }  
