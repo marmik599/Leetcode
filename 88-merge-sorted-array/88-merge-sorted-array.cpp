@@ -21,8 +21,7 @@ public:
                 j--;
             }
         }
-        if(j<0)
-        {
+       
             
           while(i>=0)
             {
@@ -30,9 +29,8 @@ public:
             k--;
             i--; 
             }   
-        }
-        if(i<0)
-        {
+        
+       
             while(j>=0)
             {
             nums1[k]=nums2[j];
@@ -40,6 +38,6 @@ public:
             j--; 
             }    
            
-        }
+        
     }
 };
