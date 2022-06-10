@@ -102,8 +102,8 @@ int intersectPoint(Node* head1, Node* head2)
         else
             b=b->next;
     }
-   if(a==NULL)
-    return -1;
+   //if(a==NULL)
+    //return -1;
     
     return a->data;
     
