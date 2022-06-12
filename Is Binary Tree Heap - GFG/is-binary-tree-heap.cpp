@@ -105,7 +105,7 @@ bool iscbt(struct Node* root,int i,int countnode)
     if(root==NULL)
         return true;
         
-    if(i>countnode)
+    if(i>=countnode)
         return false;
         
     else
