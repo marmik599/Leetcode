@@ -20,24 +20,26 @@ class Solution{
         
         for(int i=n-2;i>=0;i--)
         {
-
+            if(!st.empty() && st.top()<arr[i])
+            {
+                ans.push_back(st.top());
+                st.push(arr[i]);
+            }
+            else
+            {
                 while(!st.empty() && st.top()>=arr[i])
                 {
                     st.pop();
                 }
-                int x;
                 if(st.empty())
                 {
-                    x=-1;
+                    ans.push_back(-1);
                 }
                 else
-                {
-                 x=st.top();   
-                }
+                    ans.push_back(st.top());
                 
-                ans.push_back(x);
                 st.push(arr[i]);
-            
+            }
         }
         reverse(ans.begin(),ans.end());
         return ans;
