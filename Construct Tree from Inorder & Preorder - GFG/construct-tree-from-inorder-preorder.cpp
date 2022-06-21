@@ -41,18 +41,17 @@ struct Node
 */
 class Solution{
     public:
-    int findpos(int in[],int element,int n)
+    void createmapping(int in[],map<int,int> &inorder,int n)
     {
        
         for(int i=0;i<n;i++)
         {
-            if(in[i]==element)
-                return i;
+            inorder[in[i]]=i;
         }
-        return -1;
+        
     }
     
-    Node* solve(int in[],int pre[],int &index,int inorderst,int inorderend,int n)
+    Node* solve(int in[],int pre[],int &index,int inorderst,int inorderend,map<int,int> &inorder,int n)
     {
         if(index>=n || inorderst>inorderend)
             return NULL;
@@ -60,16 +59,18 @@ class Solution{
         int element=pre[index++];    
         Node* root=new Node(element);
         
-        int pos=findpos(in,element,n);
-        root->left=solve(in,pre,index,inorderst,pos-1,n);
-        root->right=solve(in,pre,index,pos+1,inorderend,n);
+        int pos=inorder[element];
+        root->left=solve(in,pre,index,inorderst,pos-1,inorder,n);
+        root->right=solve(in,pre,index,pos+1,inorderend,inorder,n);
         
         return root;
     }
     Node* buildTree(int in[],int pre[], int n)
     {
         int preorderindex=0;
-        Node* ans=solve(in,pre,preorderindex,0,n-1,n);
+        map<int,int> indorder;
+        createmapping(in,indorder,n);
+        Node* ans=solve(in,pre,preorderindex,0,n-1,indorder,n);
         return ans;
     }
 };
