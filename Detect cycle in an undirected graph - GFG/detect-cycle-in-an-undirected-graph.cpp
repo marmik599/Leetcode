@@ -5,49 +5,35 @@ using namespace std;
  // } Driver Code Ends
 class Solution {
   public:
-    bool bfscycle(int source,vector<bool> &visited,vector<int> adj[])
+    bool dfscycle(int source,vector<bool> &visited,vector<int> adj[],int parent)
     {
          
-        unordered_map<int,int> parent;
-        
-        queue<int> q;
-        
         visited[source]=true;
-        q.push(source);
-        parent[source]=-1;
         
-        while(q.size()>0)
+        for(auto i:adj[source])
         {
-            int u=q.front();
-            q.pop();
-            
-            for(auto i:adj[u])
+            if(visited[i]==false)
             {
-                if(visited[i]==true && i!=parent[u])
+                if(dfscycle(i,visited,adj,source))
                     return true;
-                    
-             else if(visited[i]==false)
-                {
-                    q.push(i);
-                    visited[i]=true;
-                    parent[i]=u;
-                }
-                
-                    
             }
-            
+            else
+            {
+                if(i!=parent)
+                    return true;
+            }
         }
         return false;
     }
     bool isCycle(int V, vector<int> adj[])
     {
         vector<bool> visited(V,false);
+        
        for(int i=0;i<V;i++)
        {
            if(visited[i]==false)
            {
-               bool ans=bfscycle(i,visited,adj);
-               if(ans==true)
+               if(dfscycle(i,visited,adj,-1))
                 return true;
            }
        }
