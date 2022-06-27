@@ -24,28 +24,32 @@ class Solution
 	//Function to return list containing vertices in Topological order. 
 	vector<int> topoSort(int n, vector<int> adj[]) 
 	{
-	     // DAG -> means Directed Acyclic Graph 
-	     // (u,v) -> inorder of u <= inorder of v [ A -> B ]
-	     
-	     // creating ans array and stack
+	     vector<int> indegree(n);
+	     for(int i=0;i<n;i++)
+	     {
+	         for(auto j:adj[i])
+	            indegree[j]++;
+	     }
+	     queue<int> q;
+	     for(int i=0;i<n;i++)
+	     {
+	         if(indegree[i]==0)
+	            q.push(i);
+	     }
 	     vector<int> ans;
-	     stack<int> st;
-	     
-	     // creating visited array
-	     bool visited[n] = {0};
-	     
-	     for(int i=0;i<n;i++){
-	         // if we don't visited the edge
-	         if(visited[i] == false){
-	             topology(adj,visited,st,i);
+	     while(q.size()>0)
+	     {
+	         int temp=q.front();
+	         q.pop();
+	         ans.push_back(temp);
+	         for(auto x:adj[temp])
+	         {
+	             indegree[x]--;
+	             if(indegree[x]==0)
+	                q.push(x);
 	         }
+	         
 	     }
-	     
-	     while(!st.empty()){
-	         ans.push_back(st.top());
-	         st.pop();
-	     }
-	     
 	     return ans;
 	}
 };	 
