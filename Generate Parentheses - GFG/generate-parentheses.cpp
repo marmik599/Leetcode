@@ -14,19 +14,18 @@ vector<string> AllParenthesis(int n) ;
 class Solution
 {
    public:
-    void solve(int n,vector<string>&ans,string temp,int i,int cnt1,int cnt0){
-        if(i==n){
+    void solve(vector<string>&ans,string temp,int n,int m){
+        if(n==0 && m==0)
+        {
             ans.push_back(temp);
             return;
         }
-        if(cnt1>cnt0){
-        if(cnt1<(n/2))solve(n,ans,temp+'(',i+1,cnt1+1,cnt0);
-        solve(n,ans,temp+')',i+1,cnt1,cnt0+1);
-        return;}
-        else if(cnt1==cnt0){
-            solve(n,ans,temp+'(',i+1,cnt1+1,cnt0);return;
-        }
+        if(n>0)
+            solve(ans,temp+'(',n-1,m+1);
+        if(m>0)
+            solve(ans,temp+')',n,m-1);
         return;
+        
     }
    vector<string> AllParenthesis(int n) 
    {
@@ -36,7 +35,7 @@ class Solution
          ans.push_back("()");
          return ans;
      }
-     solve(2*n,ans,"",0,0,0);
+     solve(ans,"",n,0);
        return ans;
    }
 };
