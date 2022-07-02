@@ -1,7 +1,8 @@
 class Solution {
-public:bool ispal(string s,int start,int end)
+public:bool ispal(string s)
     {
-        
+        int start=0;
+        int end=s.length()-1;
         while(start<=end)
         {
             if(s[start++]!=s[end--])
@@ -11,20 +12,22 @@ public:bool ispal(string s,int start,int end)
         }
         return true;
     }
-    void solve(vector<vector<string>> &res,vector<string> &temp,int i,string s,int n)
+    void solve(vector<vector<string>> &res,vector<string> &temp,string s)
     {
-        if(i==n)
+        if(s=="")
         {
             res.push_back(temp);
             return;
         }
         
-        for(int j=i;j<n;j++)
+        for(int j=0;j<s.size();j++)
         {
-            if(ispal(s,i,j))
+            string left=s.substr(0,j+1);
+            string right=s.substr(j+1);
+            if(ispal(left))
             {
-                temp.push_back(s.substr(i,j-i+1));
-                solve(res,temp,j+1,s,n);
+                temp.push_back(left);
+                solve(res,temp,right);
                 temp.pop_back();
             }
         }
@@ -34,7 +37,7 @@ public:bool ispal(string s,int start,int end)
         vector<vector<string>> res;
         vector<string> temp;
         int n=s.length();
-        solve(res,temp,0,s,n);
+        solve(res,temp,s);
         return res;
     }
     
