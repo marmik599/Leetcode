@@ -16,8 +16,15 @@ public:
           vector<vector<int>> ans;
           for(int i=0;i<n-1;i++)
           {
-              if(A[i]<A[i+1])
-                ans.push_back({i,i+1});
+              int low=i;
+              int high=i;
+              while(A[i]<A[i+1] && i<n-1)
+              {
+                  high++;
+                  i++;
+              }
+              if(low!=high)
+                ans.push_back({low,high});
           }
           return ans;
     }
