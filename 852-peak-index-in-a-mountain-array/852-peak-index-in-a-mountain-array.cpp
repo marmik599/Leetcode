@@ -21,7 +21,7 @@ public:
 	        }
 	        
 	    }
-	    return arr.size()-1;
+	    return -1;
         
     }
 };
