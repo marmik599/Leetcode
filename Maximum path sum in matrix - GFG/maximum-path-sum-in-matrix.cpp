@@ -9,30 +9,40 @@ using namespace std;
 
 class Solution{
 public:
-    int func(int i, int j,vector<vector<int>> &Matrix, vector<vector<int>> &dp
-, int N){
-   if(j<0 || j>=N)return 0;
-   if(i==N-1){
-       return Matrix[i][j];
-   }
-   if(dp[i][j]!=-1)return dp[i][j];
-   int a=Matrix[i][j]+func(i+1,j-1,Matrix,dp,N);
-   int b=Matrix[i][j]+func(i+1,j,Matrix,dp,N);
-   int c=Matrix[i][j]+func(i+1,j+1,Matrix,dp,N);
-   return dp[i][j]=max({a,b,c});
-}
-   int maximumPath(int N, vector<vector<int>> Matrix)
-   {
-       // code here
-      
-       vector<vector<int>> dp(N,vector<int>(N,-1));
-       int ans=INT_MIN;
-       for(int i=0; i<N; i++){
-          int posans=func(0,i,Matrix,dp,N);
-          ans=max(ans,posans);
-       }
-       return ans;
-   }
+    int solve(int i,int j,int n,vector<vector<int>> &matrix,vector<vector<int>> &dp)
+    {
+       
+        if( j>=n || j<0)
+            return 0;
+            
+        if(i==n-1)
+        {
+            return matrix[i][j];
+        }
+         
+         if(dp[i][j]!=-1)
+            return dp[i][j];
+            
+        int down=matrix[i][j]+solve(i+1,j,n,matrix,dp);
+        int leftdiag=matrix[i][j]+solve(i+1,j-1,n,matrix,dp);
+        int diag=matrix[i][j]+solve(i+1,j+1,n,matrix,dp);
+            
+        int ans=max(max(down,leftdiag),diag);
+        return dp[i][j]=ans;
+        
+    }
+    int maximumPath(int n, vector<vector<int>> matrix)
+    {
+        int ans=INT_MIN;
+        vector<vector<int>> dp(n,vector<int>(n,-1));
+        for(int i=0;i<n;i++)
+        {
+           int posans=solve(0,i,n,matrix,dp);
+           ans=max(posans,ans);
+        }
+        return ans;
+    
+    }
 };
 
 // { Driver Code Starts.
