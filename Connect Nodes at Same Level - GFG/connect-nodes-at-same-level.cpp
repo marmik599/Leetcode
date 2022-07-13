@@ -169,7 +169,7 @@ class Solution
             {
                 level[i]->nextRight=level[i+1];
             }
-            level[i]->nextRight=NULL;
+            // level[i]->nextRight=NULL;
         }
     }    
       
