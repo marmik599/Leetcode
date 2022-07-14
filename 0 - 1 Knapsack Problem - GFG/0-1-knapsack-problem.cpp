@@ -19,8 +19,8 @@ class Solution
             else
                 return 0;
         }
-        if(w==0)
-            return 0;
+        // if(w==0)
+        //     return 0;
             
         if(dp[index][w]!=-1)
             return dp[index][w];
