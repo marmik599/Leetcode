@@ -10,7 +10,7 @@ using namespace std;
 
 class Solution {
   public:
-  int solve(int index,vector<int> a,int tar)
+  int solve(int index,vector<int> a,int tar,vector<vector<int>> &dp)
   {
       if(index == 0){
             if(tar==0 && a[0]==0)
@@ -19,12 +19,14 @@ class Solution {
                 return 1;
             return 0;
     }
-    int not_taken=solve(index-1,a,tar);
+    if(dp[index][tar]!=-1)
+        return dp[index][tar];
+    int not_taken=solve(index-1,a,tar,dp);
     int taken=0;
     if(tar>=a[index])
-        taken=solve(index-1,a,tar-a[index]);
+        taken=solve(index-1,a,tar-a[index],dp);
         
-    return taken+not_taken;
+    return dp[index][tar]=taken+not_taken;
   }
     int findTargetSumWays(vector<int>&a ,int target) 
     {
@@ -37,8 +39,8 @@ class Solution {
             if((totalsum - target)<0) return 0;
             if((totalsum-target)%2 == 1) return 0;
             int tar= (totalsum-target)/2;
-            
-            return solve(n-1,a,tar);
+            vector<vector<int>> dp(n,vector<int> (tar+1,-1));
+            return solve(n-1,a,tar,dp);
     }
 };
 
