@@ -28,22 +28,24 @@ public:
         while(!q.empty())
         {
             int n=q.size();
-            vector<Node*> level;
+            //vector<Node*> level;
             for(int i=0;i<n;i++)
             {
                 Node* temp=q.front();
                 q.pop();
-                level.push_back(temp);
+                //level.push_back(temp);
+                if(i!=n-1)
+                    temp->next=q.front();
                 if(temp->left)
                     q.push(temp->left);
                 
                 if(temp->right)
                     q.push(temp->right);
             }
-            for(int i=1;i<level.size();i++)
-                level[i-1]->next=level[i];
+//             for(int i=1;i<level.size();i++)
+//                 level[i-1]->next=level[i];
             
-            level[level.size()-1]->next=NULL;
+//             level[level.size()-1]->next=NULL;
         }
         return root;
     }
