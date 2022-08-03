@@ -4,8 +4,11 @@ public:
     {
         if(amount==0)
             return 1;
-        
-        if(amount<0 || index>=coins.size())
+        // if(index==0)
+        // {
+        //     if()
+        // }
+        if(amount<0 || index<0)
             return 0;
         if(dp[index][amount]!=-1)
             return dp[index][amount];
